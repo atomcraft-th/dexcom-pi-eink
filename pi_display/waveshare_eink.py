@@ -41,7 +41,7 @@ class EinkDisplay(PiDisplay):
             drawred.text((30, 20), str(value), font = self.font60, fill = 0)
         else:
             drawblack.text((30, 20), str(value), font = self.font60, fill = 0)
-        self.epd.display(self.epd.getbuffer(Blackimage), self.epd.getbuffer(Redimage))
+        self.epd.display(self.epd.getbuffer(Blackimage.rotate(180)), self.epd.getbuffer(Redimage.rotate(180)))
         self.epd.sleep()
 
     def update_graph(image):
