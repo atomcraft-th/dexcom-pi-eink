@@ -1,6 +1,6 @@
 '''test module for eink display, initialise and display'''
 
-from display import EinkDisplay
+from pi_display import EinkDisplay
 import pytest
 import time
 

@@ -2,9 +2,9 @@ import logging
 from waveshare_epd import epd2in13b_V4
 import time
 from PIL import Image,ImageDraw,ImageFont
-from .display import Display
+from pi_display import PiDisplay
 
-class EinkDisplay(Display):
+class EinkDisplay(PiDisplay):
     def __init__(self) -> None:
         super().__init__()
         logging.basicConfig(level=logging.DEBUG)
