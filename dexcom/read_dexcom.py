@@ -28,3 +28,6 @@ class ReadDexcom:
             logging.info("reading glucose")
             self.glucose_reading = self.dexcom.get_current_glucose_reading()
             self.last_read = datetime.now()
+
+    def get_levels(self, time_m):
+        return self.dexcom.get_glucose_readings(time_m)
