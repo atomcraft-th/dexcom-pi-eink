@@ -18,14 +18,16 @@ class EinkDisplay(PiDisplay):
         self.font30 = ImageFont.truetype(os.path.join(self.imgdir, 'Font.ttc'), 30)
         time.sleep(1)
 
-    def __delattr__(self, __name: str) -> None:
-        super().__delattr__(__name)
+    def __del__(self) -> None:
         logging.info("Clear...")
         self.epd.init()
         self.epd.clear()
+        self.epd.sleep()
+
 
     def update_reading(self, value, direction_char):
         logging.info("drawing " + str(value) + " " + direction_char)
+        self.epd.init()
         Blackimage = Image.new('1', (self.epd.height, self.epd.width), 255)  # 250*122
         Redimage = Image.new('1', (self.epd.height, self.epd.width), 255)  # 250*122
         drawblack = ImageDraw.Draw(Blackimage)
