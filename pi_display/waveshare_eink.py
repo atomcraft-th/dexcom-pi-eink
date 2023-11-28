@@ -5,7 +5,7 @@ import time
 from PIL import Image,ImageDraw,ImageFont
 from pi_display import PiDisplay
 
-
+red_chars = ["↑↑", "↓↓", "?", "-"]
 
 class EinkDisplay(PiDisplay):
     def __init__(self) -> None:
@@ -25,15 +25,21 @@ class EinkDisplay(PiDisplay):
         self.epd.sleep()
 
 
-    def update_reading(self, value, direction_char):
-        logging.info("drawing " + str(value) + " " + direction_char)
+    def update_reading(self, value, direction):
+        logging.info("drawing " + str(value) + " " + direction)
         self.epd.init()
         Blackimage = Image.new('1', (self.epd.height, self.epd.width), 255)  # 250*122
         Redimage = Image.new('1', (self.epd.height, self.epd.width), 255)  # 250*122
         drawblack = ImageDraw.Draw(Blackimage)
         drawred = ImageDraw.Draw(Redimage)
-        drawblack.text((10, 0), str(value) + " " + direction_char, font = self.font30, fill = 0)
-        drawred.text((10, 30), str(value) + " " + direction_char, font = self.font30, fill = 0)
+        if (direction in red_chars):
+            drawred.text((15, 0), direction, font = self.font30, fill = 0)
+        else:
+            drawblack.text((15, 0), direction, font = self.font30, fill = 0)
+        if (value > 12 or value < 4):
+            drawblack.text((10, 0), str(value), font = self.font30, fill = 0)
+        else:
+            drawblack.text((10, 0), str(value), font = self.font30, fill = 0)
         self.epd.display(self.epd.getbuffer(Blackimage), self.epd.getbuffer(Redimage))
         self.epd.sleep()
 
