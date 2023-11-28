@@ -16,6 +16,7 @@ class EinkDisplay(PiDisplay):
         self.epd.init()
         self.epd.clear()
         self.font30 = ImageFont.truetype(os.path.join(self.imgdir, 'Font.ttc'), 30)
+        self.font60 = ImageFont.truetype(os.path.join(self.imgdir, 'Font.ttc'), 60)
         time.sleep(1)
 
     def __del__(self) -> None:
@@ -33,13 +34,13 @@ class EinkDisplay(PiDisplay):
         drawblack = ImageDraw.Draw(Blackimage)
         drawred = ImageDraw.Draw(Redimage)
         if (direction in red_chars):
-            drawred.text((150, 50), direction, font = self.font30, fill = 0)
+            drawred.text((140, 20), direction, font = self.font60, fill = 0)
         else:
-            drawblack.text((150, 50), direction, font = self.font30, fill = 0)
+            drawblack.text((140, 20), direction, font = self.font60, fill = 0)
         if (value > 20 or value < 4):
-            drawred.text((100, 50), str(value), font = self.font30, fill = 0)
+            drawred.text((30, 20), str(value), font = self.font60, fill = 0)
         else:
-            drawblack.text((100, 50), str(value), font = self.font30, fill = 0)
+            drawblack.text((30, 20), str(value), font = self.font60, fill = 0)
         self.epd.display(self.epd.getbuffer(Blackimage), self.epd.getbuffer(Redimage))
         self.epd.sleep()
 
