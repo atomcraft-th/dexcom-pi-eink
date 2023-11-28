@@ -24,7 +24,7 @@ class ReadDexcom:
         return self.glucose_reading.trend_arrow
 
     def read_dexcom(self):
-        if ((datetime.now() - self.last_read).seconds > 60):
+        if ((datetime.now() - self.last_read).seconds >= 59):
             logging.info("reading glucose")
             self.glucose_reading = self.dexcom.get_current_glucose_reading()
             self.last_read = datetime.now()
