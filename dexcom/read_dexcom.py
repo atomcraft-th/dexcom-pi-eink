@@ -9,7 +9,8 @@ class ReadDexcom:
     def __init__(self) -> None:
         login_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'passwd')
         with open(login_file, 'r') as pf:
-            lines = pf.readlines()
+            lines = pf.read().splitlines()
+        print("Read " + lines[0] + " and " + lines[1])
         self.dexcom = Dexcom(lines[0], lines[1], ous=True)
         self.glucose_reading = self.dexcom.get_current_glucose_reading()
         self.last_read = datetime.now()
