@@ -3,6 +3,7 @@
 import os
 from pydexcom import Dexcom
 from datetime import timedelta, datetime
+import logging
 
 class ReadDexcom:
     '''dexcom handling class'''
@@ -10,7 +11,6 @@ class ReadDexcom:
         login_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'passwd')
         with open(login_file, 'r') as pf:
             lines = pf.read().splitlines()
-        print("Read " + lines[0] + " and " + lines[1])
         self.dexcom = Dexcom(lines[0], lines[1], ous=True)
         self.glucose_reading = self.dexcom.get_current_glucose_reading()
         self.last_read = datetime.now()
@@ -24,6 +24,7 @@ class ReadDexcom:
         return self.glucose_reading.trend_arrow
 
     def read_dexcom(self):
-        if ((datetime.now() - self.last_read).seconds() > 60):
+        if ((datetime.now() - self.last_read).seconds > 60):
+            logging.info("reading glucose")
             self.glucose_reading = self.dexcom.get_current_glucose_reading()
             self.last_read = datetime.now()
