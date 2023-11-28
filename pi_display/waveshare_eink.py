@@ -33,13 +33,13 @@ class EinkDisplay(PiDisplay):
         drawblack = ImageDraw.Draw(Blackimage)
         drawred = ImageDraw.Draw(Redimage)
         if (direction in red_chars):
-            drawred.text((15, 0), direction, font = self.font30, fill = 0)
+            drawred.text((150, 50), direction, font = self.font30, fill = 0)
         else:
-            drawblack.text((15, 0), direction, font = self.font30, fill = 0)
-        if (value > 12 or value < 4):
-            drawblack.text((10, 0), str(value), font = self.font30, fill = 0)
+            drawblack.text((150, 50), direction, font = self.font30, fill = 0)
+        if (value > 20 or value < 4):
+            drawred.text((100, 50), str(value), font = self.font30, fill = 0)
         else:
-            drawblack.text((10, 0), str(value), font = self.font30, fill = 0)
+            drawblack.text((100, 50), str(value), font = self.font30, fill = 0)
         self.epd.display(self.epd.getbuffer(Blackimage), self.epd.getbuffer(Redimage))
         self.epd.sleep()
 
