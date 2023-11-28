@@ -7,4 +7,4 @@ import time
 def test_value():
     display = EinkDisplay()
     display.update_reading(23, chr(2190))
-    time.sleep(2)
+    time.sleep(60)
