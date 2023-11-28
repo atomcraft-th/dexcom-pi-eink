@@ -15,7 +15,7 @@ class EinkDisplay(PiDisplay):
         self.epd = epd2in13b_V4.EPD()
         self.epd.init()
         self.epd.clear()
-        self.font30 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 30)
+        self.font30 = ImageFont.truetype(os.path.join(self.imgdir, 'Font.ttc'), 30)
         time.sleep(1)
 
     def __delattr__(self, __name: str) -> None:
