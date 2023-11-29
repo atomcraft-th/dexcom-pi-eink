@@ -1,8 +1,11 @@
+import os
 import logging
 from waveshare_epd import epd2in13b_V4
 import time
 from PIL import Image,ImageDraw,ImageFont
 from pi_display import PiDisplay
+
+
 
 class EinkDisplay(PiDisplay):
     def __init__(self) -> None:
@@ -12,6 +15,7 @@ class EinkDisplay(PiDisplay):
         self.epd = epd2in13b_V4.EPD()
         self.epd.init()
         self.epd.clear()
+        self.font30 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 30)
         time.sleep(1)
 
     def __delattr__(self, __name: str) -> None:
@@ -26,8 +30,8 @@ class EinkDisplay(PiDisplay):
         Redimage = Image.new('1', (self.epd.height, self.epd.width), 255)  # 250*122
         drawblack = ImageDraw.Draw(Blackimage)
         drawred = ImageDraw.Draw(Redimage)
-        drawblack.text((10, 0), value + " " + direction_char, font = font30, fill = 0)
-        drawred.text((10, 30), value + " " + direction_char, font = font30, fill = 0)
+        drawblack.text((10, 0), str(value) + " " + direction_char, font = self.font30, fill = 0)
+        drawred.text((10, 30), str(value) + " " + direction_char, font = self.font30, fill = 0)
         self.epd.display(self.epd.getbuffer(Blackimage), self.epd.getbuffer(Redimage))
         self.epd.sleep()
 
