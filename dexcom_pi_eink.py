@@ -2,7 +2,7 @@
 
 import sys
 import time
-from pi_display import EinkDisplay
+from waveshare_epd import EinkDisplay
 from dexcom import ReadDexcom
 
 
