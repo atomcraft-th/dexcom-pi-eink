@@ -9,7 +9,7 @@ class EinkDisplay(PiDisplay):
         logging.basicConfig(level=logging.DEBUG)
         logging.info("Initialising screen...")
         self.epd = epd2in13b_V4.EPD()
-        super().__init__(self, self.epd.height, self.epd.width)
+        super().__init__(self.epd.height, self.epd.width)
         self.epd.init()
         self.epd.clear()
         time.sleep(1)
