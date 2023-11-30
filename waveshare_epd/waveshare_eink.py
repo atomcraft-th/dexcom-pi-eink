@@ -20,8 +20,8 @@ class EinkDisplay(PiDisplay):
         self.epd.clear()
         self.epd.sleep()
 
-    def draw(self, black_image, red_image):
+    def draw(self):
         self.epd.init()
-        self.epd.display(self.epd.getbuffer(black_image.rotate(180)),
-                         self.epd.getbuffer(red_image.rotate(180)))
+        self.epd.display(self.epd.getbuffer(self.black_image.rotate(180)),
+                         self.epd.getbuffer(self.red_image.rotate(180)))
         self.epd.sleep()
