@@ -11,10 +11,12 @@ def main() -> int:
     dexcom_reader = ReadDexcom()
     display = EinkDisplay()
     while(True):
+        display.update_graph(dexcom_reader.get_levels(60))
         display.update_reading(
             dexcom_reader.get_reading(),
             dexcom_reader.get_arrow()
         )
+        display.draw()
         time.sleep(60)
     return 0
 

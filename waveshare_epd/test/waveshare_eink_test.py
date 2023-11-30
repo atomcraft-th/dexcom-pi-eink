@@ -1,6 +1,6 @@
 '''test module for eink display, initialise and display'''
 
-from pi_display import EinkDisplay
+from waveshare_epd import EinkDisplay
 import pytest
 import time
 

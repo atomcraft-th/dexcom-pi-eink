@@ -8,6 +8,9 @@ class PngDisplay(PiDisplay):
         self.image_num = 0
 
     def draw(self):
+        logging.info("drawing")
         filename = "image" + str(self.image_num) + ".png"
+        logging.info("writing " + filename)
         self.black_img.save(filename)
         self.image_num = self.image_num + 1
+        self.reset_image()
