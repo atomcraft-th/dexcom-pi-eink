@@ -71,7 +71,7 @@ class PiDisplay:
         canvas = plt.get_current_fig_manager().canvas
         canvas.draw()
 
-        rgb_graph = Image.frombytes('RGBA', canvas.get_width_height(), canvas.buffer_rgba())
+        rgb_graph = Image.frombytes('RGB', canvas.get_width_height(), canvas.tostring_rgb())
         self.black_img.paste(rgb_graph.convert('1'), (10,0))
 
     def draw(self):
