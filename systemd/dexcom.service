@@ -1,0 +1,10 @@
+ [Unit]
+ Description=Dexcom Display Service
+ After=multi-user.target
+
+ [Service]
+ Type=exec
+ ExecStart=/usr/bin/python3 /home/tomh/dexcom-pi-eink/dexcom_pi_eink.py
+
+ [Install]
+ WantedBy=multi-user.target
