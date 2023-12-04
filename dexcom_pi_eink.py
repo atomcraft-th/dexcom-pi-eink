@@ -4,19 +4,23 @@ import sys
 import time
 from waveshare_epd import EinkDisplay
 from dexcom import ReadDexcom
-
+import logging
 
 def main() -> int:
     """run the reading / display loop"""
     dexcom_reader = ReadDexcom()
     display = EinkDisplay()
+    logging.basicConfig(level=logging.WARNING)
     while(True):
-        display.update_graph(dexcom_reader.get_levels(60))
-        display.update_reading(
-            dexcom_reader.get_reading(),
-            dexcom_reader.get_arrow()
-        )
-        display.draw()
+        try:
+            display.update_graph(dexcom_reader.get_levels(60))
+            display.update_reading(
+                dexcom_reader.get_reading(),
+                dexcom_reader.get_arrow()
+            )
+            display.draw()
+        except Exception as inst:
+            logging.warning(inst)
         time.sleep(60)
     return 0
 

@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import logging
 
-red_chars = ["↑↑", "↓↓", "?", "-"]
+red_chars = ["↑↑", "↓↓", "-"]
+ignore_chars = ["?"]
 
 class PiDisplay:
     '''Generic display class'''
@@ -33,7 +34,7 @@ class PiDisplay:
     def update_reading(self, value, direction):
         if (direction in red_chars):
             self.draw_red.text(self.arrow_tl, direction, font = self.reading_font, fill = 0)
-        else:
+        elif not (direction in ignore_chars):
             self.draw_black.text(self.arrow_tl, direction, font = self.reading_font, fill = 0)
         if (value > 20 or value < 4):
             self.draw_red.text(self.text_tl, str(value), font = self.reading_font, fill = 0)

@@ -6,7 +6,6 @@ from pi_display import PiDisplay
 
 class EinkDisplay(PiDisplay):
     def __init__(self) -> None:
-        logging.basicConfig(level=logging.DEBUG)
         logging.info("Initialising screen...")
         self.epd = epd2in13b_V4.EPD()
         super().__init__(self.epd.height, self.epd.width)
@@ -25,4 +24,4 @@ class EinkDisplay(PiDisplay):
         self.epd.display(self.epd.getbuffer(self.black_img.rotate(180)),
                          self.epd.getbuffer(self.red_img.rotate(180)))
         self.epd.sleep()
-        self.reset()
+        self.reset_image()
